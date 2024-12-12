@@ -1,0 +1,13 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  background-image: linear-gradient(to bottom right, #e2e2e2, #f8f8f8);
+  transition: background-color 0.5s, color 0.5s;
+  color: rgb( 35, 35, 85);
+}
