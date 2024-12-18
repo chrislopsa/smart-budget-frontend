@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import FormField from "./FormField";
 
@@ -21,9 +21,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
   onSubmit,
   footer,
 }) => {
-  const [formValues, setFormValues] = React.useState<{ [key: string]: string }>(
-    {}
-  );
+  const [formValues, setFormValues] = useState<{ [key: string]: string }>({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
