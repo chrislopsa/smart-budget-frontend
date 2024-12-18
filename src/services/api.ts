@@ -1,15 +1,35 @@
-import axios from 'axios';
+import axios, { AxiosInstance, AxiosResponse } from 'axios';
 
-const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+const axiosInstance: AxiosInstance = axios.create({
+  baseURL: 'http://localhost:4000', 
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
 
-export const getMonthlyComparison = async () => {
-  try {
-    const response = await api.get('/monthly-registers/comparison');
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    throw error;
+// Interceptor para añadir el token a cada solicitud
+axiosInstance.interceptors.request.use(
+  (config) => {
+    const token = sessionStorage.getItem('authToken');
+    if (token && config.headers) {
+      config.headers['Authorization'] = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+// Interceptor para manejar errores de autorización
+axiosInstance.interceptors.response.use(
+  (response: AxiosResponse) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      sessionStorage.clear();
+      window.location.href = '/login';
+    }
+    return Promise.reject(error);
   }
-};
+);
+
+export default axiosInstance;
+

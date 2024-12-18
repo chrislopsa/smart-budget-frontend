@@ -2,19 +2,19 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 
-// Configuración de Vite
+
 export default defineConfig({
-  plugins: [react()], // Plugin para React
+  plugins: [react()], 
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'), // Alias para facilitar las importaciones
+      '@': path.resolve(__dirname, './src'), 
     },
   },
   server: {
-    port: 3000, // Puerto para el servidor de desarrollo
+    port: 3000, 
   },
   build: {
-    outDir: 'dist', // Directorio de salida para la compilación
+    outDir: 'dist', 
   },
 });
 
